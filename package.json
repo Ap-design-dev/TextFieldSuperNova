@@ -1,0 +1,7 @@
+{
+  "name": "textfield-supernova-assets",
+  "private": true,
+  "description": "Reproducible native exports of the supplied SVG icons",
+  "scripts": { "assets": "node scripts/export-icons.cjs" },
+  "devDependencies": { "sharp": "0.35.5" }
+}
