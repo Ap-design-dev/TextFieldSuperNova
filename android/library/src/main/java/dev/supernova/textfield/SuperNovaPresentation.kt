@@ -22,6 +22,11 @@ data class SuperNovaSpacing(
 )
 
 internal object SuperNovaPresentation {
+    // The amount + Suggest example (Figma 9:1805) explicitly keeps its top separator.
+    fun beforeAmount(hasLabel: Boolean, hasDescription: Boolean, hasSuggestions: Boolean,
+                     spacing: SuperNovaSpacing): Dp =
+        if (hasLabel || (!hasDescription && hasSuggestions)) spacing.afterLabel else 0.dp
+
     fun showsSuggestions(mode: SuperNovaMode, validation: SuperNovaValidation): Boolean =
         mode != SuperNovaMode.ReadOnly || validation == SuperNovaValidation.None
 

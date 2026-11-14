@@ -97,7 +97,7 @@ private val WholeRubles = InputTransformation {
 private val GroupThousands = OutputTransformation {
     var index = length - 3
     while (index > 0) {
-        insert(index, "\u00a0")
+        replace(index, index, "\u00a0")
         index -= 3
     }
 }
@@ -127,6 +127,7 @@ fun SuperNovaAmountField(
     var focused by remember { mutableStateOf(false) }
     var hadKeyboard by remember { mutableStateOf(false) }
     val canEdit = mode == SuperNovaMode.Editable
+    val hasSuggestions = suggestions.isNotEmpty() && SuperNovaPresentation.showsSuggestions(mode, validation)
     val imeVisible = WindowInsets.isImeVisible
     LaunchedEffect(imeVisible, focused) {
         if (focused && imeVisible) hadKeyboard = true
@@ -170,7 +171,7 @@ fun SuperNovaAmountField(
     Column(modifier.padding(vertical = spacing.vertical), horizontalAlignment = Alignment.CenterHorizontally) {
         if (label != null) Text(label, modifier = Modifier.fillMaxWidth(), style = smallText.copy(
             lineHeight = 20.sp, color = if (mode == SuperNovaMode.Disabled) Ink.copy(alpha = 0.35f) else Ink))
-        Spacer(Modifier.height(spacing.afterLabel))
+        Spacer(Modifier.height(SuperNovaPresentation.beforeAmount(label != null, description != null, hasSuggestions, spacing)))
         BoxWithConstraints(Modifier.fillMaxWidth()) {
             val density = LocalDensity.current
             val measurer = rememberTextMeasurer()
@@ -199,7 +200,7 @@ fun SuperNovaAmountField(
                 // A matching leading slot keeps digits + ₽ centered independently of the action.
                 if (showAction) Spacer(Modifier.width(30.dp))
                 if (canEdit) BasicTextField(
-                    state = state.field,
+                    state = state.inputState,
                     modifier = Modifier
                         .width(numberWidth)
                         .focusRequester(focusRequester)
@@ -246,12 +247,12 @@ fun SuperNovaAmountField(
                 }
             }
         }
-        Spacer(Modifier.height(spacing.afterAmount))
+        if (description != null) Spacer(Modifier.height(spacing.afterAmount))
         if (description != null && message != null) Text(message,
             modifier = Modifier.fillMaxWidth().testTag("supernova.message").semantics { liveRegion = LiveRegionMode.Polite },
             softWrap = true,
             style = smallText.copy(lineHeight = 16.sp, color = messageColor))
-        if (suggestions.isNotEmpty() && SuperNovaPresentation.showsSuggestions(mode, validation)) {
+        if (hasSuggestions) {
             LazyRow(
                 Modifier.fillMaxWidth().padding(top = spacing.beforeSuggestions, bottom = spacing.afterSuggestions),
                 horizontalArrangement = Arrangement.spacedBy(spacing.betweenSuggestions, Alignment.CenterHorizontally),
@@ -313,11 +314,11 @@ private fun SuperNovaSkeleton(hasLabel: Boolean, hasDescription: Boolean, sugges
         if (hasLabel) Box(Modifier.height(20.dp), contentAlignment = Alignment.Center) {
             Image(painterResource(R.drawable.sn_skeleton_label), null, Modifier.size(170.dp, 10.dp))
         }
-        Spacer(Modifier.height(spacing.afterLabel))
+        Spacer(Modifier.height(SuperNovaPresentation.beforeAmount(hasLabel, hasDescription, suggestionCount > 0, spacing)))
         Box(Modifier.height(40.dp), contentAlignment = Alignment.Center) {
             Image(painterResource(R.drawable.sn_skeleton_amount), null, Modifier.size(230.dp, 20.dp))
         }
-        Spacer(Modifier.height(spacing.afterAmount))
+        if (hasDescription) Spacer(Modifier.height(spacing.afterAmount))
         if (hasDescription) Box(Modifier.height(16.dp), contentAlignment = Alignment.Center) {
             Image(painterResource(R.drawable.sn_skeleton_description), null, Modifier.size(130.dp, 8.dp))
         }

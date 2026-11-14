@@ -39,6 +39,13 @@ public struct SuperNovaSpacing {
 }
 
 enum SuperNovaPresentation {
+    /// The amount + Suggest example in Figma (9:1805) keeps its 4pt top separator.
+    /// Other hidden label/description blocks remove their adjacent separators.
+    static func beforeAmount(hasLabel: Bool, hasDescription: Bool, hasSuggestions: Bool,
+                             spacing: SuperNovaSpacing) -> CGFloat {
+        hasLabel || (!hasDescription && hasSuggestions) ? spacing.afterLabel : 0
+    }
+
     static func showsSuggestions(mode: SuperNovaMode, validation: SuperNovaValidation) -> Bool {
         mode != .readOnly || validation == .none
     }

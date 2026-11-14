@@ -8,15 +8,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.text.TextRange
 
 @Stable
-class SuperNovaAmountState internal constructor(internal val field: TextFieldState) {
+class SuperNovaAmountState internal constructor(internal val inputState: TextFieldState) {
     /** Observable from composition or snapshotFlow; no integer overflow or floating point. */
-    val amount: String get() = AmountText.normalize(field.text.toString()).orEmpty()
+    val amount: String get() = AmountText.normalize(inputState.text.toString()).orEmpty()
 
     /** Replaces the amount and puts the caret at its end without changing focus. */
     fun setAmount(value: String) {
         val normalized = requireNotNull(AmountText.normalize(value)) { "Expected whole rubles" }
         val display = normalized.ifEmpty { "0" }
-        field.edit {
+        inputState.edit {
             replace(0, length, display)
             selection = TextRange(length)
         }
@@ -25,7 +25,7 @@ class SuperNovaAmountState internal constructor(internal val field: TextFieldSta
     fun clear() = setAmount("")
 
     internal fun moveCaretToEnd() {
-        field.edit { selection = TextRange(length) }
+        inputState.edit { selection = TextRange(length) }
     }
 }
 

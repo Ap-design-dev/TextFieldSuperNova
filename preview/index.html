@@ -2004,6 +2004,7 @@ html&gt;body{padding:0}&lt;/style&gt;
   const messageEditor = root.querySelector(&#x27;#sn2-message-text&#x27;);
   const messageSetting = root.querySelector(&#x27;.sn-message-setting&#x27;);
   const content = root.querySelector(&#x27;.sn-content&#x27;);
+  const amountRow = root.querySelector(&#x27;.sn-amount&#x27;);
   const skeleton = root.querySelector(&#x27;.sn-skeleton&#x27;);
   const chips = Array.from(root.querySelectorAll(&#x27;.sn-chip&#x27;));
   const icons = {arrow:&#x27;data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQiIGhlaWdodD0iMTUiIHZpZXdCb3g9IjAgMCAxNCAxNSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTQuMzM1NjYgMi4yNTI2QzQuNzQ4NDQgMS44ODU2OSA1LjM4MDUxIDEuOTIyODcgNS43NDc0MyAyLjMzNTY0TDkuNzQ3NDMgNi44MzU2NEMxMC4wODQyIDcuMjE0NTQgMTAuMDg0MiA3Ljc4NTQ4IDkuNzQ3NDMgOC4xNjQzOEw1Ljc0NzQzIDEyLjY2NDRDNS4zODA1MSAxMy4wNzcyIDQuNzQ4NDQgMTMuMTE0MyA0LjMzNTY2IDEyLjc0NzRDMy45MjI4OCAxMi4zODA1IDMuODg1NjkgMTEuNzQ4NCA0LjI1MjYxIDExLjMzNTdMNy42NjIwNiA3LjUwMDAxTDQuMjUyNjEgMy42NjQzN0MzLjg4NTY5IDMuMjUxNTkgMy45MjI4OCAyLjYxOTUyIDQuMzM1NjYgMi4yNTI2VjIuMjUyNloiIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBmaWxsPSIjMUYxRjIyIiBmaWxsLW9wYWNpdHk9IjAuNDUiLz4KPC9zdmc+Cg==&#x27;,clear:&#x27;data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTExLjI5MjkgMy4yOTI4OUw4IDYuNTg1NzlMNC43MDcxMSAzLjI5Mjg5QzQuMzE2NTggMi45MDIzNyAzLjY4MzQyIDIuOTAyMzcgMy4yOTI4OSAzLjI5Mjg5QzIuOTAyMzcgMy42ODM0MiAyLjkwMjM3IDQuMzE2NTggMy4yOTI4OSA0LjcwNzExTDYuNTg1NzkgOEwzLjI5Mjg5IDExLjI5MjlDMi45MDIzNyAxMS42ODM0IDIuOTAyMzcgMTIuMzE2NiAzLjI5Mjg5IDEyLjcwNzFDMy42ODM0MiAxMy4wOTc2IDQuMzE2NTggMTMuMDk3NiA0LjcwNzExIDEyLjcwNzFMOCA5LjQxNDIxTDExLjI5MjkgMTIuNzA3MUMxMS42ODM0IDEzLjA5NzYgMTIuMzE2NiAxMy4wOTc2IDEyLjcwNzEgMTIuNzA3MUMxMy4wOTc2IDEyLjMxNjYgMTMuMDk3NiAxMS42ODM0IDEyLjcwNzEgMTEuMjkyOUw5LjQxNDIxIDhMMTIuNzA3MSA0LjcwNzExQzEzLjA5NzYgNC4zMTY1OCAxMy4wOTc2IDMuNjgzNDIgMTIuNzA3MSAzLjI5Mjg5QzEyLjMxNjYgMi45MDIzNyAxMS42ODM0IDIuOTAyMzcgMTEuMjkyOSAzLjI5Mjg5VjMuMjkyODlaIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZmlsbD0iIzFGMUYyMiIgZmlsbC1vcGFjaXR5PSIwLjQ1Ii8+Cjwvc3ZnPgo=&#x27;};
@@ -2019,6 +2020,15 @@ html&gt;body{padding:0}&lt;/style&gt;
   };
   const format = text =&gt; (text || &#x27;0&#x27;).replace(/\B(?=(\d{3})+(?!\d))/g,&#x27;\u00a0&#x27;);
   const digitCount = text =&gt; (text.match(/[0-9]/g) || []).length;
+  function blockGaps(hasLabel,hasDescription,hasSuggestions) {
+    // Figma 9:1805: only amount + Suggest retains the 4px separator above the amount.
+    return {before:hasLabel || (!hasDescription &amp;&amp; hasSuggestions) ? 4 : 0,after:hasDescription ? 4 : 0};
+  }
+  function applyBlockGaps(row,hasLabel,hasDescription,hasSuggestions) {
+    const gaps = blockGaps(hasLabel,hasDescription,hasSuggestions);
+    row.style.marginTop = gaps.before + &#x27;px&#x27;;
+    row.style.marginBottom = gaps.after + &#x27;px&#x27;;
+  }
   function updateCaret() {
     if (!editing || !editable()) return;
     measure.textContent = input.value.slice(0,input.selectionStart ?? input.value.length);
@@ -2075,6 +2085,11 @@ html&gt;body{padding:0}&lt;/style&gt;
     skeleton.querySelector(&#x27;.sn-skeleton-label&#x27;).hidden = label.hidden;
     skeleton.querySelector(&#x27;.sn-skeleton-description&#x27;).hidden = !config.showDescription || !config.description.trim();
     skeleton.querySelector(&#x27;.sn-skeleton-suggestions&#x27;).hidden = !config.showSuggestions;
+    applyBlockGaps(amountRow,!label.hidden,!description.hidden,!presets.hidden);
+    applyBlockGaps(skeleton.querySelector(&#x27;.sn-skeleton-amount&#x27;),
+      !skeleton.querySelector(&#x27;.sn-skeleton-label&#x27;).hidden,
+      !skeleton.querySelector(&#x27;.sn-skeleton-description&#x27;).hidden,
+      !skeleton.querySelector(&#x27;.sn-skeleton-suggestions&#x27;).hidden);
     const base = config.mode === &#x27;readOnly&#x27; ? &#x27;Read Only&#x27; : config.mode === &#x27;disabled&#x27; ? &#x27;Disabled&#x27; : config.mode === &#x27;skeleton&#x27; ? &#x27;Skeleton&#x27; : editing ? (amount ? &#x27;Active&#x27;:&#x27;Default&#x27;) : (amount ? &#x27;Filled&#x27;:&#x27;Empty&#x27;);
     currentState = (validation === &#x27;error&#x27; ? &#x27;Error &#x27; : validation === &#x27;warning&#x27; ? &#x27;Warning &#x27; : &#x27;&#x27;) + base;
     output.textContent = currentState;

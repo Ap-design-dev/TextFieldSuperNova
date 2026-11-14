@@ -1,0 +1,19 @@
+{
+  "source": "https://www.figma.com/design/l1Mc2dfm0aVfw93T8GmmuM/?node-id=9-1497",
+  "width": 375,
+  "labelHeight": 20,
+  "amountHeight": 50,
+  "descriptionHeight": 16,
+  "suggestionsHeight": 44,
+  "verticalPadding": 24,
+  "cases": [
+    {"nodeId":"4:365","label":true,"description":true,"suggestions":true,"beforeAmount":4,"afterAmount":4,"height":186},
+    {"nodeId":"9:1726","label":false,"description":true,"suggestions":true,"beforeAmount":0,"afterAmount":4,"height":162},
+    {"nodeId":"9:1771","label":true,"description":false,"suggestions":true,"beforeAmount":4,"afterAmount":0,"height":166},
+    {"nodeId":"9:1805","label":false,"description":false,"suggestions":true,"beforeAmount":4,"afterAmount":0,"height":146},
+    {"nodeId":"9:1870","label":true,"description":true,"suggestions":false,"beforeAmount":4,"afterAmount":4,"height":142},
+    {"nodeId":"9:1893","label":true,"description":false,"suggestions":false,"beforeAmount":4,"afterAmount":0,"height":122},
+    {"nodeId":"9:1916","label":false,"description":true,"suggestions":false,"beforeAmount":0,"afterAmount":4,"height":118},
+    {"nodeId":"9:1838","label":false,"description":false,"suggestions":false,"beforeAmount":0,"afterAmount":0,"height":98}
+  ]
+}

@@ -2,6 +2,24 @@ import XCTest
 @testable import TextFieldSuperNova
 
 final class PresentationTests: XCTestCase {
+    func testHiddenElementHeightsMatchFigmaSection2() {
+        // Reference heights are measured from the eight Figma examples at width 375.
+        let cases: [(Bool, Bool, Bool, CGFloat)] = [
+            (true, true, true, 186), (false, true, true, 162),
+            (true, false, true, 166), (false, false, true, 146),
+            (true, true, false, 142), (true, false, false, 122),
+            (false, true, false, 118), (false, false, false, 98)
+        ]
+        let spacing = SuperNovaSpacing()
+        for (label, description, suggestions, expected) in cases {
+            let top = SuperNovaPresentation.beforeAmount(hasLabel: label, hasDescription: description,
+                                                        hasSuggestions: suggestions, spacing: spacing)
+            let height = 48 + (label ? 20 : 0) + top + 50
+                + (description ? 4 + 16 : 0) + (suggestions ? 44 : 0)
+            XCTAssertEqual(height, expected, "Label=\(label), Description=\(description), Suggest=\(suggestions)")
+        }
+    }
+
     func testPresetSelectionTracksNumericValue() {
         XCTAssertTrue(SuperNovaPresentation.isSelected(amount: "1000000", suggestion: "1 000 000 ₽"))
         XCTAssertFalse(SuperNovaPresentation.isSelected(amount: "1000001", suggestion: "1000000"))

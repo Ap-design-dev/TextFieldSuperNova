@@ -75,7 +75,9 @@ public struct SuperNovaAmountField: View {
                         .frame(maxWidth: .infinity, minHeight: labelHeight)
                 }
             }
-            Spacer().frame(height: spacing.afterLabel)
+            Spacer().frame(height: SuperNovaPresentation.beforeAmount(
+                hasLabel: label != nil, hasDescription: description != nil,
+                hasSuggestions: showsSuggestions, spacing: spacing))
             if mode == .skeleton {
                 skeletonImage("sn_skeleton_amount", width: 230, height: 20)
                     .frame(height: amountHeight * 0.8)
@@ -91,7 +93,7 @@ public struct SuperNovaAmountField: View {
                 )
                 .frame(height: amountHeight)
             }
-            Spacer().frame(height: spacing.afterAmount)
+            Spacer().frame(height: description != nil ? spacing.afterAmount : 0)
             if let description {
                 if mode == .skeleton {
                     skeletonImage("sn_skeleton_description", width: 130, height: 8).frame(height: descriptionHeight)
