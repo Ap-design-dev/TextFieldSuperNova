@@ -13,6 +13,7 @@ async function main() {
     ['icons','sc_srv_caretright_stroke_16'], ['icons','sc_srv_cross_stroke_16'],
     ['skeleton','sn_skeleton_label'], ['skeleton','sn_skeleton_amount'],
     ['skeleton','sn_skeleton_description'], ['skeleton','sn_skeleton_suggestion'],
+    ['skeleton','sn_credit_text'], ['skeleton','sn_credit_button'],
   ];
   for (const [folder, name] of sources) {
     const source = path.join(root, 'assets', folder, name + '.svg');

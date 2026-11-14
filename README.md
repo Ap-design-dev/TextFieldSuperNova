@@ -4,7 +4,7 @@
 
 ## Статус
 
-Исходный код версии 0.2 подготовлен. Браузерный предпросмотр проверен интерактивно; он является отдельной моделью интерфейса. Локально нет Xcode, JDK и Android SDK; нативные сборки и тесты выполняются в [GitHub Actions](https://github.com/Ap-design-dev/TextFieldSuperNova/actions). Проверяйте результат для нужного коммита. Визуальная проверка на устройствах ещё требуется. Результаты и ограничения — в [docs/verification.md](docs/verification.md).
+Исходный код версии 0.3 подготовлен. Браузерный предпросмотр проверен интерактивно; он является отдельной моделью интерфейса. Локально нет Xcode, JDK и Android SDK; нативные сборки и тесты выполняются в [GitHub Actions](https://github.com/Ap-design-dev/TextFieldSuperNova/actions). Проверяйте результат для нужного коммита. Визуальная проверка на устройствах ещё требуется. Результаты и ограничения — в [docs/verification.md](docs/verification.md).
 
 Режимы: редактируемое поле, Read Only, Disabled, Skeleton. Сообщения Error/Warning принимает приложение и снимает явно. Точное совпадение с готовой суммой выделяет Suggest, в том числе при ручном вводе. Каждый обычный тап ставит каретку в конец, толщина — 2 единицы макета; сумма уменьшается до 50%, затем прокручивается горизонтально.
 
@@ -16,7 +16,13 @@ Error и Warning поддерживают многострочный текст:
 
 Скачайте репозиторий через **Code → Download ZIP**, распакуйте и откройте [preview/index.html](preview/index.html) в браузере. В нём можно вводить сумму, менять Label/Description, переключать режимы, ошибки и предупреждения. Встроенное отображение HTML на странице GitHub показывает код; для работы предпросмотра файл нужно скачать и открыть локально.
 
-Редактируемый исходный фрагмент находится в [preview/fragment.html](preview/fragment.html). Это браузерная модель интерфейса; она не исполняет Swift/Kotlin. Готовый [архив исходников](deliverables/TextFieldSuperNova-v0.2-source.zip) также включён в репозиторий.
+Редактируемый исходный фрагмент находится в [preview/fragment.html](preview/fragment.html). Это браузерная модель интерфейса; она не исполняет Swift/Kotlin. Готовый [архив исходников](deliverables/TextFieldSuperNova-v0.3-source.zip) также включён в репозиторий.
+
+## Credit Potential
+
+Добавлен новый вид по [макетам Figma](https://www.figma.com/design/l1Mc2dfm0aVfw93T8GmmuM/?node-id=15-1940): сумма, многострочный текст и кнопка информации по центру. Кнопка работает в Read Only и вызывает обработчик приложения для открытия пуллера/страницы. При скрытых тексте и кнопке под суммой остаётся 32 px. Каретка — 2 px; SB Sans Text Semibold подключён.
+
+Откройте [preview/credit-potential.html](preview/credit-potential.html) после скачивания. API SwiftUI/Compose и все размеры — в [docs/credit-potential.md](docs/credit-potential.md). Исходный вид доступен в прежнем предпросмотре.
 
 ## iOS — SwiftUI
 
@@ -109,8 +115,8 @@ gradle :library:connectedDebugAndroidTest
 ## Материалы
 
 - `assets/icons` — оригинальные SVG без изменений.
-- `assets/skeleton` — четыре оригинальных элемента Skeleton из Figma, сохранённые без перерисовки.
-- `assets/fonts` — все пять предоставленных файлов шрифтов; в каждую платформу включены только используемые Display Semibold и Text Regular.
+- `assets/skeleton` — оригинальные элементы Skeleton из Figma, сохранённые без перерисовки.
+- `assets/fonts` — все шесть предоставленных файлов шрифтов; в каждую платформу включены Display Semibold, Text Regular и Text Semibold.
 - `ios/.../Resources` и `android/library/src/main/res` — шрифты и экспортированные иконки для платформ.
 - `docs/behavior.md` — поведение, размеры, принятые допущения и сценарии приёмки.
 

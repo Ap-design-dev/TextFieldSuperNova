@@ -2,6 +2,20 @@ import XCTest
 @testable import TextFieldSuperNova
 
 final class PresentationTests: XCTestCase {
+    func testCreditHiddenBlocksKeepOnlyBottomSpacing() {
+        let cases: [(Bool, Bool, CGFloat)] = [
+            (true, true, 138), (true, false, 106),
+            (false, true, 118), (false, false, 82)
+        ]
+        let spacing = SuperNovaCreditSpacing()
+        for (text, button, expected) in cases {
+            let gap = SuperNovaCreditPresentation.afterAmount(hasText: text, hasButton: button, spacing: spacing)
+            let height = 50 + gap + (text ? 20 : 0) + (button ? 32 : 0) + spacing.bottom
+            XCTAssertEqual(height, expected)
+        }
+        XCTAssertEqual(SuperNovaCreditMode.readOnly.amountMode, .readOnly)
+    }
+
     func testHiddenElementHeightsMatchFigmaSection2() {
         // Reference heights are measured from the eight Figma examples at width 375.
         let cases: [(Bool, Bool, Bool, CGFloat)] = [

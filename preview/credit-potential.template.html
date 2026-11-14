@@ -1,0 +1,220 @@
+<style>
+__FONTS__
+#sn-credit{color-scheme:light dark}
+#sn-credit [hidden]{display:none!important}
+#sn-credit .sn-stage{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:52px 0 24px;box-sizing:border-box}
+#sn-credit .sn-product{width:min(375px,100%);background:#fff;color:#1f1f22;padding:0 0 32px;box-sizing:border-box;color-scheme:light;font-family:SNText,sans-serif}
+#sn-credit .sn-amount{height:50px;display:flex;justify-content:center;align-items:center}
+#sn-credit .sn-group{position:relative;display:flex;align-items:center;justify-content:center;gap:4px;font:600 42px/50px SNDisplay,sans-serif;color:rgba(31,31,34,.65);max-width:100%}
+#sn-credit .sn-group[data-filled=true]{color:#1f1f22}
+#sn-credit .sn-viewport{position:relative;height:50px;overflow:hidden}
+#sn-credit .sn-input{display:block;box-sizing:content-box;border:0;outline:none!important;box-shadow:none!important;border-radius:0;background:transparent;padding:0;margin:0;color:inherit;font:inherit;line-height:50px;height:50px;min-width:0;caret-color:transparent;appearance:none}
+#sn-credit .sn-input::selection{background:#d9e8ee}
+#sn-credit .sn-caret{position:absolute;top:0;bottom:0;width:2px;background:#1f1f22;pointer-events:none;display:none}
+#sn-credit .sn-group[data-focused=true] .sn-caret{display:block;animation:sn-credit-caret 1s step-end infinite}
+@keyframes sn-credit-caret{0%,49%{opacity:1}50%,100%{opacity:0}}
+@media(prefers-reduced-motion:reduce){#sn-credit .sn-group[data-focused=true] .sn-caret{animation:none}}
+#sn-credit .sn-currency{font:inherit;line-height:50px;user-select:none}
+#sn-credit .sn-action{position:absolute;left:calc(100% + 6px);top:0;width:24px;height:50px;border:0;padding:0;background:transparent;display:flex;align-items:center;justify-content:center;touch-action:manipulation}
+#sn-credit .sn-action img{display:block;width:14px;height:15px}
+#sn-credit .sn-action[data-editing=true] img{width:16px;height:16px}
+#sn-credit .sn-description{min-height:20px;text-align:center;color:#1f1f22;font:400 14px/20px SNText,sans-serif;margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
+#sn-credit .sn-description[data-warning=true]{color:#ef4c01}
+#sn-credit .sn-information{display:block;box-sizing:border-box;min-height:32px;min-width:102px;max-width:100%;margin:0 auto;padding:6px 0;border:0;border-radius:0;background:transparent;color:#008985;font:600 14px/20px SNText,sans-serif;white-space:pre-wrap;overflow-wrap:anywhere;text-align:center;touch-action:manipulation}
+#sn-credit .sn-measure{position:absolute;visibility:hidden;white-space:pre;pointer-events:none;font:inherit}
+#sn-credit .sn-skeleton-amount,#sn-credit .sn-skeleton-text,#sn-credit .sn-skeleton-button{display:flex;align-items:center;justify-content:center}
+#sn-credit .sn-skeleton-amount{height:40px}
+#sn-credit .sn-skeleton-text{height:20px}
+#sn-credit .sn-skeleton-button{height:32px}
+#sn-credit .sn-skeleton img{display:block}
+#sn-credit .sn-demo-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;width:min(343px,calc(100% - 32px));font:400 12px/18px system-ui,sans-serif;color:light-dark(#686870,#b4b4bc)}
+#sn-credit .sn-done,#sn-credit .sn-close{border:0;background:light-dark(#e9e9ed,#303036);color:light-dark(#232329,#ededf1);border-radius:8px;padding:8px 14px;font:500 13px/20px system-ui,sans-serif;touch-action:manipulation}
+#sn-credit .sn-done:disabled{opacity:.5}
+#sn-credit .sn-settings{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 16px;margin-top:18px;font:400 13px/20px system-ui,sans-serif;color:light-dark(#3b3b42,#dddde4)}
+#sn-credit .sn-setting{display:flex;flex-direction:column;gap:6px;min-width:0}
+#sn-credit .sn-settings select,#sn-credit .sn-settings textarea,#sn-credit .sn-settings input[type=text]{box-sizing:border-box;max-width:100%;width:100%;padding:9px 10px;border:1px solid light-dark(#d9d9df,#484850);border-radius:8px;background:light-dark(#fff,#232328);color:light-dark(#1f1f22,#f2f2f7);font:400 14px/20px system-ui,sans-serif}
+#sn-credit .sn-settings textarea{resize:vertical;min-height:64px}
+#sn-credit .sn-options,#sn-credit .sn-message-setting{grid-column:1/-1}
+#sn-credit .sn-switches{display:flex;flex-wrap:wrap;gap:10px 20px;margin-top:12px}
+#sn-credit .sn-switches label{display:flex;gap:7px;align-items:center;min-height:28px}
+#sn-credit .sn-switches input{margin:0;accent-color:light-dark(#3b3b3e,#e1e1e7)}
+#sn-credit .sn-info{position:absolute;inset:0;z-index:2;background:#fff;color:#1f1f22;color-scheme:light;padding:24px;box-sizing:border-box;display:flex;flex-direction:column;gap:20px;font:400 14px/20px SNText,sans-serif}
+#sn-credit .sn-info[data-presentation=sheet]{top:auto;min-height:180px;border-radius:24px 24px 0 0;box-shadow:0 -12px 32px #1f1f2220}
+#sn-credit .sn-info h2{font:600 20px/28px SNDisplay,sans-serif;margin:0}
+#sn-credit .sn-close{align-self:flex-start}
+@media(max-width:460px){#sn-credit .sn-settings{grid-template-columns:minmax(0,1fr)}}
+@media(pointer:coarse){#sn-credit .sn-action{width:44px;left:calc(100% - 4px)}#sn-credit .sn-switches label{min-height:44px}#sn-credit .sn-settings textarea,#sn-credit .sn-settings input[type=text],#sn-credit .sn-settings select{font-size:16px}}
+</style>
+<div id="sn-credit">
+  <div class="sn-stage viz-dotted-background">
+    <section class="sn-product" aria-label="Credit Potential" data-mode="editable">
+      <div class="sn-content">
+        <div class="sn-amount"><div class="sn-group" data-filled="true" data-focused="false">
+          <div class="sn-viewport"><input id="sn-credit-amount" class="sn-input" aria-label="Сумма в рублях" type="text" inputmode="numeric" autocomplete="off" spellcheck="false" aria-describedby="sn-credit-description" value="1 500 000" size="1"><span class="sn-caret" aria-hidden="true"></span></div>
+          <span class="sn-currency" aria-hidden="true">₽</span>
+          <button class="sn-action cursor-interaction" type="button" aria-label="Редактировать сумму" data-editing="false"><img src="__ARROW__" width="14" height="15" alt=""></button>
+          <span class="sn-measure" aria-hidden="true"></span>
+        </div></div>
+        <p id="sn-credit-description" class="sn-description">Text Potential</p>
+        <button class="sn-information cursor-interaction" type="button">Button</button>
+      </div>
+      <div class="sn-skeleton" role="status" aria-label="Загрузка суммы" hidden>
+        <div class="sn-skeleton-amount"><img src="__SKELETON_AMOUNT__" width="230" height="20" alt=""></div>
+        <div class="sn-skeleton-text"><img src="__SKELETON_TEXT__" width="170" height="10" alt=""></div>
+        <div class="sn-skeleton-button"><img src="__SKELETON_BUTTON__" width="102" height="8" alt=""></div>
+      </div>
+    </section>
+    <div class="sn-demo-toolbar"><output class="sn-state" aria-live="polite">Filled</output><button type="button" class="sn-done cursor-interaction" disabled>Готово</button></div>
+    <section class="sn-info" role="dialog" aria-modal="true" aria-labelledby="sn-credit-info-title" hidden>
+      <button class="sn-close cursor-interaction" type="button">Закрыть</button><h2 id="sn-credit-info-title">Дополнительная информация</h2>
+    </section>
+  </div>
+  <div class="sn-settings" aria-label="Настройки Credit Potential">
+    <label class="sn-setting">Режим<select id="sn-credit-mode"><option value="editable">Редактируемое</option><option value="readOnly">Read Only</option><option value="skeleton">Skeleton</option></select></label>
+    <label class="sn-setting">Сообщение<select id="sn-credit-validation"><option value="none">Без сообщения</option><option value="warning">Предупреждение</option></select></label>
+    <label class="sn-setting">Текст<textarea id="sn-credit-text" rows="3" wrap="soft" maxlength="1000">Text Potential</textarea></label>
+    <label class="sn-setting">Текст кнопки<input id="sn-credit-button-title" type="text" value="Button" maxlength="200"></label>
+    <label class="sn-setting">Открытие информации<select id="sn-credit-presentation"><option value="sheet">Пуллер</option><option value="page">Страница</option></select></label>
+    <label class="sn-setting sn-message-setting" hidden>Текст предупреждения<textarea id="sn-credit-warning" rows="3" wrap="soft" maxlength="1000">Warning text</textarea></label>
+    <details class="sn-options"><summary class="cursor-interaction">Видимость элементов</summary><div class="sn-switches">
+      <label><input type="checkbox" data-setting="showText" checked>Текст</label>
+      <label><input type="checkbox" data-setting="showButton" checked>Кнопка</label>
+      <label><input type="checkbox" data-setting="showChevron" checked>Шеврон</label>
+      <label><input type="checkbox" data-setting="showClear" checked>Крестик</label>
+    </div></details>
+  </div>
+</div>
+<script>
+(() => {
+  const root = document.getElementById('sn-credit');
+  const input = root.querySelector('.sn-input'), group = root.querySelector('.sn-group');
+  const viewport = root.querySelector('.sn-viewport'), caret = root.querySelector('.sn-caret');
+  const action = root.querySelector('.sn-action'), icon = action.querySelector('img');
+  const measure = root.querySelector('.sn-measure'), product = root.querySelector('.sn-product');
+  const output = root.querySelector('.sn-state'), description = root.querySelector('.sn-description');
+  const information = root.querySelector('.sn-information'), done = root.querySelector('.sn-done');
+  const content = root.querySelector('.sn-content'), amountRow = root.querySelector('.sn-amount');
+  const skeleton = root.querySelector('.sn-skeleton'), info = root.querySelector('.sn-info');
+  const close = root.querySelector('.sn-close'), toolbar = root.querySelector('.sn-demo-toolbar');
+  const modeSelect = root.querySelector('#sn-credit-mode'), validationSelect = root.querySelector('#sn-credit-validation');
+  const textEditor = root.querySelector('#sn-credit-text'), titleEditor = root.querySelector('#sn-credit-button-title');
+  const warningEditor = root.querySelector('#sn-credit-warning'), presentationSelect = root.querySelector('#sn-credit-presentation');
+  const icons = {arrow:'__ARROW__',clear:'__CLEAR__'};
+  const config = {component:'creditPotential',mode:'editable',validation:'none',text:'Text Potential',buttonTitle:'Button',warningText:'Warning text',showText:true,showButton:true,showChevron:true,showClear:true,presentation:'sheet'};
+  let amount = '1500000', editing = false, currentState = 'Filled';
+  let before = {value:'0',start:1,end:1,type:''};
+  const editable = () => config.mode === 'editable';
+  const normalize = text => {
+    const digits = text.trim().replace(/₽$/,'').replace(/[ \u00a0\u202f]/g,'');
+    return /^[0-9]*$/.test(digits) ? digits.replace(/^0+/,'') : null;
+  };
+  const format = text => (text || '0').replace(/\B(?=(\d{3})+(?!\d))/g,'\u00a0');
+  const digitCount = text => (text.match(/[0-9]/g) || []).length;
+  function updateCaret() {
+    if (!editing || !editable()) return;
+    measure.textContent = input.value.slice(0,input.selectionStart ?? input.value.length);
+    caret.style.left = Math.min(Math.max(0,viewport.clientWidth - 2),Math.max(0,measure.getBoundingClientRect().width - input.scrollLeft)) + 'px';
+  }
+  function resize() {
+    if (config.mode === 'skeleton') return;
+    group.style.fontSize = '42px'; measure.textContent = input.value;
+    const available = Math.max(1,product.clientWidth - (action.hidden ? 32 : 64));
+    const full = measure.getBoundingClientRect().width + 33;
+    group.style.fontSize = Math.max(21,Math.min(42,42 * available / full)) + 'px';
+    measure.textContent = '₽'; const currencyWidth = measure.getBoundingClientRect().width;
+    measure.textContent = input.value;
+    const width = Math.max(1,Math.min(available - currencyWidth - 4,Math.ceil(measure.getBoundingClientRect().width) + 2));
+    viewport.style.width = width + 'px'; input.style.width = width + 'px';
+    updateCaret(); requestAnimationFrame(updateCaret);
+  }
+  function render() {
+    if (!editable()) editing = false;
+    input.value = format(amount); input.readOnly = !editable(); input.disabled = config.mode === 'skeleton';
+    product.dataset.mode = config.mode; product.setAttribute('aria-busy',String(config.mode === 'skeleton'));
+    group.dataset.filled = String(Boolean(amount)); group.dataset.focused = String(editing && editable());
+    action.hidden = !editable() || !(editing ? config.showClear : config.showChevron);
+    action.dataset.editing = String(editing); action.setAttribute('aria-label',editing ? 'Очистить сумму' : 'Редактировать сумму');
+    icon.src = editing ? icons.clear : icons.arrow;
+    icon.width = editing ? 16 : 14; icon.height = editing ? 16 : 15;
+    const warning = config.validation === 'warning' && config.mode !== 'skeleton';
+    description.textContent = warning ? config.warningText : config.text;
+    description.dataset.warning = String(warning); description.hidden = !config.showText;
+    information.textContent = config.buttonTitle; information.hidden = !config.showButton;
+    content.hidden = config.mode === 'skeleton'; skeleton.hidden = !content.hidden;
+    const gap = config.showText || config.showButton ? '4px' : '0px';
+    amountRow.style.marginBottom = gap; skeleton.querySelector('.sn-skeleton-amount').style.marginBottom = gap;
+    skeleton.querySelector('.sn-skeleton-text').hidden = !config.showText;
+    skeleton.querySelector('.sn-skeleton-button').hidden = !config.showButton;
+    const base = config.mode === 'skeleton' ? 'Skeleton' : config.mode === 'readOnly' ? 'Read Only' : editing ? (amount ? (warning ? 'Active' : 'Default') : 'Default') : (amount ? 'Filled' : 'Empty');
+    currentState = (warning ? 'Warning ' : '') + base; output.textContent = currentState; done.disabled = !editing;
+    modeSelect.value = config.mode; validationSelect.value = config.validation; validationSelect.disabled = config.mode === 'skeleton';
+    root.querySelector('.sn-message-setting').hidden = !warning;
+    if (document.activeElement !== warningEditor) warningEditor.value = config.warningText;
+    resize();
+  }
+  function save() {
+    window.openai?.setWidgetState?.({modelContent:{...config,amount,state:currentState},privateContent:null}).catch(() => {});
+  }
+  function restore(saved) {
+    const m = saved?.modelContent;
+    if (!m || m.component !== 'creditPotential') return;
+    if (typeof m.amount === 'string' && normalize(m.amount) !== null) amount = normalize(m.amount);
+    if (['editable','readOnly','skeleton'].includes(m.mode)) config.mode = m.mode;
+    if (['none','warning'].includes(m.validation)) config.validation = m.validation;
+    if (['sheet','page'].includes(m.presentation)) config.presentation = m.presentation;
+    for (const key of ['text','buttonTitle','warningText']) if (typeof m[key] === 'string') config[key] = m[key].slice(0,key === 'buttonTitle' ? 200 : 1000);
+    for (const key of ['showText','showButton','showChevron','showClear']) if (typeof m[key] === 'boolean') config[key] = m[key];
+    textEditor.value = config.text; titleEditor.value = config.buttonTitle; presentationSelect.value = config.presentation;
+    root.querySelectorAll('[data-setting]').forEach(c => {c.checked = config[c.dataset.setting];});
+    if (!editable()) input.blur(); render();
+  }
+  function moveEnd() {
+    if (!editable()) return;
+    input.setSelectionRange(input.value.length,input.value.length);updateCaret();requestAnimationFrame(updateCaret);
+  }
+  function begin() {if (editable()) {input.focus();moveEnd();}}
+  function caretForOrdinal(value,ordinal) {
+    if (!amount) return 1;
+    let seen = 0, position = 0;
+    for (const c of value) {if (seen >= ordinal) break;position++;if (/[0-9]/.test(c)) seen++;}
+    return position;
+  }
+  input.addEventListener('focus',() => {if (!editable()) {input.blur();return;}editing = true;render();moveEnd();});
+  input.addEventListener('click',moveEnd);
+  input.addEventListener('blur',() => {editing = false;render();save();});
+  input.addEventListener('scroll',updateCaret); input.addEventListener('keyup',updateCaret);
+  input.addEventListener('beforeinput',e => {before = {value:input.value,start:input.selectionStart,end:input.selectionEnd,type:e.inputType};});
+  input.addEventListener('input',() => {
+    if (!editable()) {render();return;}
+    let candidate = input.value, position = input.selectionStart;
+    if (before.type === 'deleteContentBackward' && before.start === before.end && before.start > 1 && /[ \u00a0\u202f]/.test(before.value[before.start-1])) {
+      candidate = before.value.slice(0,before.start-2) + before.value.slice(before.start);position = before.start-2;
+    }
+    const normalized = normalize(candidate);
+    if (normalized === null) {render();input.setSelectionRange(before.start,before.end);updateCaret();return;}
+    const ordinal = Math.max(0,digitCount(candidate.slice(0,position)) - (digitCount(candidate)-normalized.length));
+    amount = normalized;render();const next = caretForOrdinal(input.value,ordinal);input.setSelectionRange(next,next);updateCaret();save();
+  });
+  action.addEventListener('pointerdown',e => e.preventDefault());
+  action.addEventListener('click',() => {if (!editable()) return;if (editing) {amount = '';render();save();}begin();});
+  group.querySelector('.sn-currency').addEventListener('click',begin);
+  done.addEventListener('click',() => {input.blur();editing = false;render();save();});
+  input.addEventListener('keydown',e => {if (e.key === 'Enter' || e.key === 'Escape') {e.preventDefault();input.blur();}});
+  modeSelect.addEventListener('change',() => {input.blur();config.mode = modeSelect.value;render();save();});
+  validationSelect.addEventListener('change',() => {config.validation = validationSelect.value;render();save();});
+  textEditor.addEventListener('input',() => {config.text = textEditor.value;render();save();});
+  titleEditor.addEventListener('input',() => {config.buttonTitle = titleEditor.value;render();save();});
+  warningEditor.addEventListener('input',() => {config.warningText = warningEditor.value;render();save();});
+  presentationSelect.addEventListener('change',() => {config.presentation = presentationSelect.value;save();});
+  root.querySelectorAll('[data-setting]').forEach(c => c.addEventListener('change',() => {config[c.dataset.setting] = c.checked;render();save();}));
+  function closeInfo() {info.hidden = true;product.inert = false;toolbar.inert = false;root.querySelector('.sn-settings').inert = false;information.focus();}
+  information.addEventListener('click',() => {
+    input.blur();info.dataset.presentation = config.presentation;close.textContent = config.presentation === 'page' ? 'Назад' : 'Закрыть';
+    info.hidden = false;product.inert = true;toolbar.inert = true;root.querySelector('.sn-settings').inert = true;close.focus();save();
+  });
+  close.addEventListener('click',closeInfo);
+  info.addEventListener('keydown',e => {if (e.key === 'Escape') closeInfo();if (e.key === 'Tab') {e.preventDefault();close.focus();}});
+  window.addEventListener('openai:set_globals',e => {if (e.detail?.globals?.widgetState) restore(e.detail.globals.widgetState);});
+  new ResizeObserver(resize).observe(product);render();restore(window.openai?.widgetState);document.fonts.ready.then(resize);
+})();
+</script>

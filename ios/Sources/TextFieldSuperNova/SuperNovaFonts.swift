@@ -4,7 +4,7 @@ import UIKit
 
 enum SuperNovaFonts {
     private static let registration: Void = {
-        for name in ["SBSansDisplay-SemiBold", "SBSansText-Regular"] {
+        for name in ["SBSansDisplay-SemiBold", "SBSansText-Regular", "SBSansText-Semibold"] {
             if let url = Bundle.module.url(forResource: name, withExtension: "ttf") {
                 CTFontManagerRegisterFontsForURL(url as CFURL, .process, nil)
             }
@@ -20,6 +20,12 @@ enum SuperNovaFonts {
     static func text(_ size: CGFloat) -> UIFont {
         _ = registration
         return UIFont(name: "SBSansText-Regular", size: size) ?? .systemFont(ofSize: size)
+    }
+
+    static func textSemibold(_ size: CGFloat) -> UIFont {
+        _ = registration
+        return UIFont(name: "SBSansText-Semibold", size: size)
+            ?? .systemFont(ofSize: size, weight: .semibold)
     }
 }
 #endif

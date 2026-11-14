@@ -53,5 +53,20 @@
     "path": "assets/skeleton/sn_skeleton_suggestion.svg",
     "bytes": 448,
     "sha256": "b6249b5f6ba9eb3cdd98606a698c7c9cb4d480f2efbb2739758c5f0a8b4749a1"
+  },
+  {
+    "path": "assets/fonts/SBSansText-Semibold.ttf",
+    "bytes": 100348,
+    "sha256": "561dd191f26ef1177f6cea8155d87dd955ba7656c540a33b99366b0c2ed90bfe"
+  },
+  {
+    "path": "assets/skeleton/sn_credit_text.svg",
+    "bytes": 418,
+    "sha256": "ca225a3f1274cf3598a424f5c3741e23b40c7c6c250e3e7fe7a6c227029b55ec"
+  },
+  {
+    "path": "assets/skeleton/sn_credit_button.svg",
+    "bytes": 410,
+    "sha256": "40b0b34fb5ee3ebd60d6b2304a4577a9cb9da673dc2a2308afdcd4f9eba1d41e"
   }
 ]

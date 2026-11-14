@@ -6,6 +6,20 @@ import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class PresentationTest {
+    @Test fun creditHiddenBlocksKeepOnlyBottomSpacing() {
+        val spacing = SuperNovaCreditSpacing()
+        val cases = listOf(
+            (true to true) to 138, (true to false) to 106,
+            (false to true) to 118, (false to false) to 82,
+        )
+        for ((visibility, expected) in cases) {
+            val (text, button) = visibility
+            val gap = SuperNovaCreditPresentation.afterAmount(text, button, spacing).value
+            val actual = 50 + gap + (if (text) 20 else 0) + (if (button) 32 else 0) + spacing.bottom.value
+            assertEquals(visibility.toString(), expected.toFloat(), actual, 0f)
+        }
+    }
+
     @Test fun hiddenElementHeightsMatchFigmaSection2() {
         val cases = listOf(
             Triple(true, true, true) to 186, Triple(false, true, true) to 162,

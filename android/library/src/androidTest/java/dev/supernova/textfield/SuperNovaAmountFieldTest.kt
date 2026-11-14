@@ -17,6 +17,22 @@ import org.junit.Test
 class SuperNovaAmountFieldTest {
     @get:Rule val compose = createComposeRule()
 
+    @Test fun creditInformationWorksInReadOnlyWithoutChangingAmount() {
+        lateinit var state: SuperNovaAmountState
+        var opened = 0
+        compose.setContent {
+            state = rememberSuperNovaAmountState("1500000")
+            SuperNovaCreditPotential(state, onInformation = { opened++ },
+                mode = SuperNovaCreditMode.ReadOnly, warning = "Проверьте условия\nПеред продолжением")
+        }
+        compose.onNodeWithTag("supernova.credit.information").performClick()
+        compose.onNodeWithTag("supernova.credit.text").assertTextEquals("Проверьте условия\nПеред продолжением")
+        compose.runOnIdle {
+            assertEquals(1, opened)
+            assertEquals("1500000", state.amount)
+        }
+    }
+
     @Test fun presetsAndClearKeepFocus() {
         lateinit var state: SuperNovaAmountState
         compose.setContent {
